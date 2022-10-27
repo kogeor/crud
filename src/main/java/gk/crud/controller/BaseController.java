@@ -1,28 +1,25 @@
 package gk.crud.controller;
 
 import gk.crud.model.Item;
+import gk.crud.service.ItemService;
+import gk.crud.service.impl.ItemServiceImpl;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.util.List;
+
 @Controller
 public class BaseController {
-    private static Item item;
-
-    static {
-        item = new Item();
-        item.setTitle("Test");
-        item.setYear(1);
-        item.setGenre("Test Genre");
-        item.setWatched(true);
-    }
+    private ItemService itemService = new ItemServiceImpl();
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public ModelAndView allItems() {
+        List<Item> items = itemService.allItems();
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("base");
-        modelAndView.addObject("item", item);
+        modelAndView.addObject("itemsList", items);
         return modelAndView;
     }
 

@@ -1,10 +1,10 @@
-package gk.crud.dao;
+package gk.crud.service;
 
 import gk.crud.model.Item;
 
 import java.util.List;
 
-public interface ItemDAO {
+public interface ItemService {
     List<Item> allItems();
 
     void add(Item item);
